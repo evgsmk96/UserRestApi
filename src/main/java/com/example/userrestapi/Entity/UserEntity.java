@@ -2,7 +2,7 @@ package com.example.userrestapi.Entity;
 
 
 import javax.persistence.*;
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -12,6 +12,9 @@ public class UserEntity {
     private Long id;
     private String name;
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private List<ToDoEntity> todos;
 
     public Long getId() {
         return id;

@@ -39,6 +39,5 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
 
 }
