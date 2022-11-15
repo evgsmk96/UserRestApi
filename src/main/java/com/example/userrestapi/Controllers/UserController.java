@@ -2,7 +2,7 @@ package com.example.userrestapi.Controllers;
 
 import com.example.userrestapi.Entity.UserEntity;
 import com.example.userrestapi.Exepction.UserAlreadyExistEx;
-import com.example.userrestapi.Exepction.UserNotFound;
+import com.example.userrestapi.Exepction.UserNotFoundEx;
 import com.example.userrestapi.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -32,19 +32,19 @@ public class UserController {
     public ResponseEntity getUser(@RequestParam Long id) {
         try {
             return ResponseEntity.ok(userService.getUser(id));
-        } catch (UserNotFound e) {
+        } catch (UserNotFoundEx e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Не ок");
+            return ResponseEntity.badRequest().body("Ошибка");
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id){
         try {
-            return ResponseEntity.ok(userService.delete(id));
+            return ResponseEntity.ok(userService.deleteUser(id));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Не ок");
+            return ResponseEntity.badRequest().body("Ошибка");
         }
 
     }

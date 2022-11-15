@@ -3,7 +3,7 @@ package com.example.userrestapi.Service;
 
 import com.example.userrestapi.Entity.UserEntity;
 import com.example.userrestapi.Exepction.UserAlreadyExistEx;
-import com.example.userrestapi.Exepction.UserNotFound;
+import com.example.userrestapi.Exepction.UserNotFoundEx;
 import com.example.userrestapi.Model.User;
 import com.example.userrestapi.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +22,15 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public User getUser(Long id) throws UserNotFound {
+    public User getUser(Long id) throws UserNotFoundEx {
         UserEntity user = userRepo.findById(id).get();
         if (user == null) {
-            throw new UserNotFound("Пользователь не найден");
+            throw new UserNotFoundEx("Пользователь не найден");
         }
         return User.toModel(user);
     }
 
-    public Long delete(Long id){
+    public Long deleteUser(Long id){
         userRepo.deleteById(id);
         return id;
     }
